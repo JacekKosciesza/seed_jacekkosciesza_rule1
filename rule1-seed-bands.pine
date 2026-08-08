@@ -1,0 +1,35 @@
+//@version=6
+indicator("Rule #1 Sticker Price Bands (Seed)", overlay = true)
+
+// Reads the Rule #1 buy/sticker series from the Pine Seeds repo and draws the
+// four bands. Auto-renders on any symbol present in the seed (ACN, EPAM, GOOGL,
+// LULU today); stays blank on symbols not in the feed. Add tickers by pushing a
+// new data/<SYM>.csv to the repo — no edit here needed.
+
+src    = "seed_jacekkosciesza_rule1"                 // must equal the repo name
+transp = input.int(82, "Band transparency", minval = 0, maxval = 100)
+
+// open = Buy Price, close = Sticker Price (see build-pine-seed.mjs encoding)
+buyPrice  = request.seed(src, syminfo.ticker, open,  ignore_invalid_symbol = true)
+sticker   = request.seed(src, syminfo.ticker, close, ignore_invalid_symbol = true)
+buy20     = buyPrice * 1.20
+sticker20 = sticker  * 1.20
+
+// ── Colors (matched to the ruleonetoolbox chart) ──
+cBuy       = color.rgb(46, 139, 76)    // Buy Price          — dark green
+cBuy20     = color.rgb(200, 227, 194)  // 20% Above Buy      — light green
+cSticker   = color.rgb(197, 232, 247)  // Sticker Price      — light blue
+cSticker20 = color.rgb(165, 28, 28)    // 20% Above Sticker  — dark red
+
+// ── Invisible band edges (fill boundaries only) ──
+pZero      = plot(na(buyPrice) ? na : 0, "Zero base",         display = display.none)
+pBuy       = plot(buyPrice,               "Buy Price",         display = display.none)
+pBuy20     = plot(buy20,                   "20% Above Buy",     display = display.none)
+pSticker   = plot(sticker,                 "Sticker Price",     display = display.none)
+pSticker20 = plot(sticker20,               "20% Above Sticker", display = display.none)
+
+// ── Semi-transparent filled bands, bottom → top ──
+fill(pZero,    pBuy,       color = color.new(cBuy,       transp), title = "Buy Price")
+fill(pBuy,     pBuy20,     color = color.new(cBuy20,     transp), title = "20% Above Buy Price")
+fill(pBuy20,   pSticker,   color = color.new(cSticker,   transp), title = "Sticker Price")
+fill(pSticker, pSticker20, color = color.new(cSticker20, transp), title = "20% Above Sticker")

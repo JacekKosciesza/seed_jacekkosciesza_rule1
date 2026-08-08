@@ -1,0 +1,36 @@
+{
+  "symbol": [
+    "ACN",
+    "EPAM",
+    "GOOGL",
+    "LULU"
+  ],
+  "description": [
+    "ACN Rule #1 Sticker Price Bands",
+    "EPAM Rule #1 Sticker Price Bands",
+    "GOOGL Rule #1 Sticker Price Bands",
+    "LULU Rule #1 Sticker Price Bands"
+  ],
+  "pricescale": [
+    100,
+    100,
+    100,
+    100
+  ],
+  "minmovement": 1,
+  "session": "0900-1600",
+  "timezone": "America/New_York",
+  "type": [
+    "stock",
+    "stock",
+    "stock",
+    "stock"
+  ],
+  "currency": [
+    "USD",
+    "USD",
+    "USD",
+    "USD"
+  ],
+  "has-intraday": false
+}
