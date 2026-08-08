@@ -1,8 +1,19 @@
 # seed_jacekkosciesza_rule1
 
-Custom [TradingView Pine Seeds](https://github.com/tradingview/pine-seeds-docs) data:
-Rule #1 **sticker / buy price bands** per company, consumed by the
-`rule1-seed-bands.pine` indicator.
+Custom TradingView data: Rule #1 **sticker / buy price bands** per company.
+
+## ⚠️ Which indicator to use
+
+- **`rule1-codegen-bands.pine`** — ✅ **use this.** Self-contained: the band data
+  is baked into the script as arrays, so it works in TradingView immediately on
+  paste. Regenerate with `invest/scripts/build-pine-codegen.mjs`.
+- **`rule1-seed-bands.pine`** — ❌ **not working yet.** Uses `request.seed()` to
+  fetch from the Pine Seeds feed below, but
+  [TradingView has suspended new Pine Seeds repositories](https://github.com/tradingview-pine-seeds/docs),
+  so this repo can't be connected right now. Kept for when/if Pine Seeds reopens.
+
+The `data/` + `symbol_info/` feed below is the Pine Seeds side (dormant until
+connection is possible).
 
 ## Layout
 
